@@ -8,6 +8,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
+import java.util.stream.IntStream;
+
 /**
  * Created by pgm on 20/10/17.
  */
@@ -24,8 +26,7 @@ public class AlgorithmCommandLineRunner implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
 
-        for (int i =  1; i <= 100; i++ ) {
-            LOGGER.info(String.valueOf(algorithmService.checkNumber(i)));
-        }
+        IntStream.range(1, 101)
+                .forEach(n -> LOGGER.info(algorithmService.checkNumber(n)));
     }
 }

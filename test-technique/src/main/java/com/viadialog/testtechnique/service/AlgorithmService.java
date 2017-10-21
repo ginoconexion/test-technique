@@ -4,6 +4,9 @@ import com.viadialog.testtechnique.helper.AlgorithmHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 /**
  * Created by pgm on 19/10/17.
  */
@@ -14,18 +17,15 @@ public class AlgorithmService {
     private AlgorithmHelper algorithmHelper;
 
     public String checkNumber(int number) {
-        String output = "";
 
-        output += algorithmHelper.checkIfDivisibleByNumber(number, 3, AlgorithmHelper.FOO);
-        output += algorithmHelper.checkIfDivisibleByNumber(number, 5, AlgorithmHelper.BAR);
-        output += algorithmHelper.checkIfDivisibleByNumber(number, 7, AlgorithmHelper.QIX);
+        String output = Stream.of(
+                algorithmHelper.checkIfDivisibleByNumber(number, 3, AlgorithmHelper.FOO),
+                algorithmHelper.checkIfDivisibleByNumber(number, 5, AlgorithmHelper.BAR),
+                algorithmHelper.checkIfDivisibleByNumber(number, 7, AlgorithmHelper.QIX),
+                algorithmHelper.checkOccurences(number)
+        ).collect(Collectors.joining(""));
 
-        output += algorithmHelper.checkOccurences(number);
-
-        if (output.equals("")) {
-            output = String.valueOf(number);
-        }
-        return output;
+        return output.equals("") ? String.valueOf(number) : output;
     }
 
 }

@@ -48,5 +48,4 @@ public class AlgorithmServiceTest {
     public void check_if_21_is_FooQix() {
         Assert.assertEquals("FooQix", algorithmService.checkNumber(21));
     }
-
 }
